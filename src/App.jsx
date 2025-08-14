@@ -11,8 +11,8 @@ function App() {
   const [selectedUser,setselectedUser]=useState("Adit")
   const [isLoggedIn,setisLoggedIn]=useState(false)
   const AppId=1177127459
-  const tokenA="04AAAAAGieK38ADKrUJACiDtHaK/RPmgCvLTbMCwHf2lSWrF5uyhnnMxVe9Sozv1HE3MTS071GOzBiyT7Pt7nSiiovWWoAmNyTvOJhY78xqwN11LEXQTdLkVQXFBzYrluWGsWCjPIvNayLfye8o0EAzDF5Q/gX69Vdcz9DghvK9ma7ORREu3DN8QBOaY52Pcr7sNLWLi1FS8gIhIJ/QSlMgOjSIcc/8swZ1l1RJDaBxWy15B7lF0KAqaYoe4RcPTS1N1TOVDZt1wE="
-  const tokenB="04AAAAAGieK8MADCKhYczSQgNv6Wp/GACuJCmLRPz2zZZA/2rc+fiGwS2BVzA7zjn8uPV+u28ZGFyAR67PeXfJE0EvOIC433RfGitBt0YaOmb5BHTjbDYRzDgcVT63SehRwhzrmc61rQ50ZEBLkWR5gZtleLHFRpW4tzt1FRnqlYbh2g2gP0JSNlIY7sQkX4ij/BCm4lD2cbFKXFf2oWCC7ZTO9RMObMhLIUr46IHWj9insucVFZ2Oh0Y9IYIkjHdXgXuUknTRAQ=="
+  const tokenA="04AAAAAGiff8EADH29+fESdemduJEfiwCuv0F8TUrVt3vd/RkIMbI90t1e2fNtaCPX15oVG+4hpGuRnf7nk13dswNxWyJDWuG2TkUgLvrXPXds534XvNtbPKqnLvOJUGYYRz2d4m6Sk8W26xs5WCRVB401ogocxbv9wkn3FRRaLrzMv5cqcse2R5Fc5Gaxj71l9h3NUpQqm1p4OkGIsQkTyCkgGWu6OimR+kpbLH5N6cM/Vhv2QDJhH4maE+9O6WRjqpl3zUENAQ=="
+  const tokenB="04AAAAAGiff+EADCbj+ctYXaLumuBOOQCtqUdA4XQHVHuJFUiUpazeB6h8zRHuw3VykCDVQly8Z2QTLdWt9B7bIeWx2vvbGtnM5yvbhegUCI1O3oXGsHE8h65r0U6sWxYr7UAYrvUyyaFB2z5Xy3Dw+gpACGhB8NJScdvgmLYOx7q/H+iQNRLqkfnciJbjQSkFidaCTs1kEpsKb90Eu3+VN9aQjXm21JQyveNwRVzU6IuEI981KoJupgyWW+B9qGnyF5zlkGUB"
   useEffect(()=>{
     const instance=ZIM.create(AppId)
     setZimInstance(instance)
@@ -55,6 +55,24 @@ return ()=>{ instance.destroy()}
  messageEndRef.current.scrollIntoView({behavior:"smooth"})
     }
   },[messages])
+   
+  const handleLogOut=()=>{
+    setisLoggedIn(false);
+    setuserInfo(null);
+    setmessages([]);
+    setmessageText("");
+    setselectedUser("Adit"); 
+    
+    if(zimInstance) {
+      zimInstance.logout()
+        .then(() => {
+          console.log("Logged out successfully");
+        })
+        .catch((err) => {
+          console.log("Logout error:", err);
+        });
+    }
+  }
 
 
 
@@ -151,7 +169,7 @@ const messageTextObj = {
               <span>Chatting with: {selectedUser === "Adit" ? "Dev" : "Adit"}</span>
               <button 
                 className="logout-button" 
-                onClick={() => setisLoggedIn(false)}
+                onClick={handleLogOut}
               >
                 Logout
               </button>
