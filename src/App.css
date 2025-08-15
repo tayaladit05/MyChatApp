@@ -1,7 +1,5 @@
-/* Importing Google Fonts for a modern look */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
@@ -23,7 +21,7 @@ body {
   padding: 20px;
 }
 
-/* ===== LOGIN PAGE STYLES ===== */
+
 .login-container {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
@@ -88,7 +86,7 @@ body {
   transform: translateY(0);
 }
 
-/* ===== CHAT PAGE STYLES ===== */
+ /* CHAT PAGE STYLES  */
 .chat-container {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);

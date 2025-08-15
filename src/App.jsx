@@ -22,7 +22,7 @@ function App() {
 });
 instance.on('connectionStateChanged', function (zim, { state, event}) {
     console.log('connectionStateChanged', state, event);
-    if (state === 2) { // Connected
+    if (state === 2) { 
         console.log('User is now connected and ready to send/receive messages');
     }
 });
@@ -34,8 +34,6 @@ instance.on('peerMessageReceived', function (zim, { messageList }) {
 });
 instance.on('tokenWillExpire', function (zim, { second }) {
     console.log('tokenWillExpire', second);
-    // You can call the renewToken method to renew the token. 
-    // To generate a new Token, refer to the Prerequisites.
     zim.renewToken(selectedUser=="Adit"?tokenA:tokenB)
         .then(function(){
             console.log("token renewed")
@@ -104,8 +102,8 @@ return ()=>{ instance.destroy()}
   {
 if(!isLoggedIn) return
 
-const toConversationID = selectedUser=="Adit"?"Dev":"Adit"; // Peer user's ID.
-const conversationType = 0; // Message type; One-to-one chat: 0, in-room chat: 1, group chat:2 
+const toConversationID = selectedUser=="Adit"?"Dev":"Adit"; 
+const conversationType = 0;  
 const config = { 
     priority: 1,
   };
@@ -115,12 +113,12 @@ const messageTextObj = {
     console.log('Sending message to:', toConversationID, messageTextObj);
     zimInstance.sendMessage(messageTextObj, toConversationID, conversationType, config)
     .then(function ({ message }) {
-        // Message sent successfully.
+      
         console.log('Message sent successfully:', message);
         setmessages(prev=>[...prev,message])
     })
     .catch(function (err) {
-        // Failed to send a message.
+        
         console.log('Failed to send message:', err)
     });
     setmessageText("")
@@ -141,7 +139,7 @@ const messageTextObj = {
       {!isLoggedIn ? (
         // Login Page
         <div className="login-container">
-          <h1>Real Time Chat App</h1>
+          <h1>Vamos-A Real Time Chat App</h1>
           
           <select 
             className="user-select" 
@@ -207,7 +205,7 @@ const messageTextObj = {
               placeholder="Type your message..."
               value={messageText}
               onChange={(e) => setmessageText(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
             />
             <button 
               className="send-button" 
